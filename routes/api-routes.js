@@ -2,7 +2,7 @@ const router = require("express").Router();
 const Dictionary = require("../models/dictionary.js");
 
 //Retrieve all words
-router.get("/api/words", (req, res) => {
+router.get("/api/all", (req, res) => {
   Dictionary.find({})
     .select("word")
     .then(data => {
@@ -14,7 +14,7 @@ router.get("/api/words", (req, res) => {
 });
 
 //Retrieve meaning of a given word
-router.get("/api/word/:word", (req, res) => {
+router.get("/api/:word", (req, res) => {
   Dictionary.findOne({
     word: req.params.word
   })
@@ -28,7 +28,7 @@ router.get("/api/word/:word", (req, res) => {
 });
 
 //List all the words starting with a given letter
-router.get("/api/words/:letter", (req, res) => {
+router.get("/api/all/:letter", (req, res) => {
   Dictionary.find({
     word: { $regex: '^' + req.params.letter, $options: 'i' }
   })
