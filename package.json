@@ -2,9 +2,13 @@
   "name": "20-dictionary-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "node server.js",
+    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "client": "cd client && npm run start",
     "seed": "node seeder/seed.js"
   },
   "repository": {
@@ -19,11 +23,15 @@
   },
   "homepage": "https://github.com/coleman-buffa/dictionary-api#readme",
   "dependencies": {
+    "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.11.2",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "mongoose": "^5.12.2"
+    "mongoose": "^5.12.2",
+    "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
+    "concurrently": "^6.0.0",
     "nodemon": "^2.0.7"
   }
 }
